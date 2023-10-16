@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Flow\ETL\Adapter\Avro\FlixTech\Tests\Unit;
+namespace Flow\ETL\Adapter\Avro\Tests\Unit;
 
 use Flow\ETL\Adapter\Avro\FlixTech\ValueConverter;
 use Flow\ETL\Exception\InvalidArgumentException;

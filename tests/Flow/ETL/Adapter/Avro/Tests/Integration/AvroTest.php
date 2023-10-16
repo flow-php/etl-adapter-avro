@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Flow\ETL\Adapter\Avro\FlixTech\Tests\Integration;
+namespace Flow\ETL\Adapter\Avro\Tests\Integration;
 
 use Flow\ETL\Config;
 use Flow\ETL\DSL\Avro;

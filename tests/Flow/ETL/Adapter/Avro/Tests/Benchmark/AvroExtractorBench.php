@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Flow\ETL\Adapter\Text\Tests\Benchmark;
+namespace Flow\ETL\Adapter\Avro\Tests\Benchmark;
 
 use Flow\ETL\DSL\Avro;
 use PhpBench\Attributes\Iterations;
