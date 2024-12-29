@@ -7,11 +7,10 @@ namespace Flow\ETL\Adapter\Avro\Tests\Integration;
 use function Flow\ETL\DSL\Adapter\Avro\{to_avro};
 use Flow\ETL\Adapter\Avro\FlixTech\AvroExtractor;
 use Flow\ETL\Extractor\Signal;
-use Flow\ETL\{Config, FlowContext};
+use Flow\ETL\{Config, FlowContext, Tests\FlowTestCase};
 use Flow\Filesystem\Path;
-use PHPUnit\Framework\TestCase;
 
-final class AvroTest extends TestCase
+final class AvroTest extends FlowTestCase
 {
     protected function setUp() : void
     {
