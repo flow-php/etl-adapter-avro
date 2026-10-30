@@ -2,20 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Flow\ETL\Adapter\Avro\FlixTech;
+namespace Flow\ETL\Adapter\Avro\IO\Extractor;
 
-use Flow\ETL\Exception\RuntimeException;
-use Flow\ETL\Exception\SchemaNotDerivableException;
-use Flow\ETL\Extractor;
-use Flow\ETL\Extractor\File\FileExtractor;
-use Flow\ETL\Extractor\File\FileScan;
-use Flow\ETL\Extractor\File\PathFiltering;
-use Flow\ETL\Extractor\File\Scanning;
-use Flow\ETL\Extractor\Signal;
-use Flow\ETL\Extractor\Statistics;
-use Flow\ETL\FlowContext;
-use Flow\ETL\Rows;
-use Flow\ETL\Schema;
+use Flow\ETL\Foundation\Exception\RuntimeException;
+use Flow\ETL\Foundation\Exception\SchemaNotDerivableException;
+use Flow\ETL\Functions\ScalarFunction;
+use Flow\ETL\IO\Extractor;
+use Flow\ETL\IO\Extractor\Criteria;
+use Flow\ETL\IO\Extractor\File\FileExtractor;
+use Flow\ETL\IO\Extractor\Signal;
+use Flow\ETL\IO\Extractor\Statistics;
+use Flow\ETL\Values\Column\Backend;
+use Flow\ETL\Values\Rows;
+use Flow\ETL\Values\Schema;
 use Flow\Filesystem\Filesystem;
 use Flow\Filesystem\Local\NativeLocalFilesystem;
 use Flow\Filesystem\Path;
@@ -23,11 +22,7 @@ use Generator;
 
 final class AvroExtractor implements Extractor, FileExtractor
 {
-    use Scanning;
-
     private ?Schema $schema = null;
-
-    use PathFiltering;
 
     public function __construct(
         private readonly Path $path,
@@ -41,9 +36,9 @@ final class AvroExtractor implements Extractor, FileExtractor
     /**
      * @return Generator<int, Rows, Signal|null, void>
      */
-    public function scan(FlowContext $context, FileScan $scan): Generator
+    public function extract(Backend $backend, Criteria $criteria): Generator
     {
-        yield Rows::empty(new Schema(), $context->backend());
+        yield Rows::empty(new Schema(), $backend);
     }
 
     public function schema(): Schema
@@ -61,6 +56,13 @@ final class AvroExtractor implements Extractor, FileExtractor
         return new Schema();
     }
 
+    public function prunes(ScalarFunction $conjunct): bool
+    {
+        return false;
+    }
+
+    public function refresh(): void {}
+
     public function source(): Path
     {
         return $this->path;
@@ -76,5 +78,10 @@ final class AvroExtractor implements Extractor, FileExtractor
     public function statistics(): Statistics
     {
         return new Statistics();
+    }
+
+    public function isRepeatable(): bool
+    {
+        return false;
     }
 }

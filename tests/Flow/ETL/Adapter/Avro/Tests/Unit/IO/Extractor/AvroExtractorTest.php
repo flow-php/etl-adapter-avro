@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Flow\ETL\Adapter\Avro\Tests\Unit\FlixTech;
+namespace Flow\ETL\Adapter\Avro\Tests\Unit\IO\Extractor;
 
-use Flow\ETL\Adapter\Avro\FlixTech\AvroExtractor;
+use Flow\ETL\Adapter\Avro\IO\Extractor\AvroExtractor;
 use Flow\ETL\Tests\FlowTestCase;
 use ReflectionClass;
 
